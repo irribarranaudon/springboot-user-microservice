@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.ulisesbocchio:jasypt-spring-boot-starter:2.0.0" type="repository">
+    <properties maven-id="com.github.ulisesbocchio:jasypt-spring-boot-starter:2.0.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ulisesbocchio/jasypt-spring-boot-starter/2.0.0/jasypt-spring-boot-starter-2.0.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ulisesbocchio/jasypt-spring-boot/2.0.0/jasypt-spring-boot-2.0.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jasypt/jasypt/1.9.2/jasypt-1.9.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

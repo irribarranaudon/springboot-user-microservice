@@ -1,0 +1,4 @@
+com/irribarra/microservice/app/usermicroservice/UserMicroserviceApplicationTests.java
+ com.irribarra.microservice.app.usermicroservice.UserMicroserviceApplicationTests
+com/irribarra/microservice/app/usermicroservice/util/UserUtilsTest.java
+ com.irribarra.microservice.app.usermicroservice.util.UserUtilsTest
