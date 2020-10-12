@@ -2,6 +2,7 @@ package com.irribarra.microservice.app.usermicroservice.util;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
 import com.irribarra.microservice.app.usermicroservice.models.dto.PhoneRequestDTO;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.entity.Phone;
@@ -149,6 +150,21 @@ public class UserUtils {
     }
 
     /**
+     * @param user entidad usuario para crear o actualizar.
+     * @return respuesta custom.
+     */
+    public static UserCreateResponseDTO getResponseUser(User user) {
+        UserCreateResponseDTO response = new UserCreateResponseDTO();
+        try {
+            BeanUtils.copyProperties(response, user);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            log.error("Error al copiar propiedades de la respuesta.");
+            throw new RuntimeException();
+        }
+        return response;
+    }
+
+    /**
      * Convierte una solicitud de usuario a una entiedad persistente.
      *
      * @param user Solicitud cliente.
@@ -172,12 +188,12 @@ public class UserUtils {
      * @return Nueva lista de teléfonos perisistentes.
      */
     private static List<Phone> getPhones(List<PhoneRequestDTO> phones) {
-        return phones.stream().map(phone ->
-                Phone.builder()
-                        .cityCode(phone.getCityCode())
-                        .countryCode(phone.getCountryCode())
-                        .number(phone.getNumber())
-                        .build()
-        ).collect(Collectors.toList());
+        return phones.stream().map(phone -> {
+            Phone newPhone = new Phone();
+            newPhone.setCityCode(phone.getCityCode());
+            newPhone.setCountryCode(phone.getCountryCode());
+            newPhone.setNumber(phone.getNumber());
+            return newPhone;
+        }).collect(Collectors.toList());
     }
 }

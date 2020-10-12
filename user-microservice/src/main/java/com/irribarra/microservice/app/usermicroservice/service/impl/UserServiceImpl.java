@@ -63,22 +63,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserCreateResponseDTO saveOrUpdate(User user, UUID id) throws BusinessException {
         UserUtils.validateEmailFormatt(user.getEmail());
-        return getResponseUser(id != null ? updateUser(user, id) : saveUser(user));
+        return UserUtils.getResponseUser(id != null ? updateUser(user, id) : saveUser(user));
     }
 
-    /**
-     * @param user entidad usuario para crear o actualizar.
-     * @return respuesta custom.
-     */
-    private UserCreateResponseDTO getResponseUser(User user) {
-        UserCreateResponseDTO response = new UserCreateResponseDTO();
-        try {
-            BeanUtils.copyProperties(response, user);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.error("Error al copiar propiedades de la respuesta.");
-            throw new RuntimeException();
-        }
-        return response;
+    @Override
+    @Transactional
+    public void deleteById(UUID id) {
+        userRepository.deleteById(id);
     }
 
     private User updateUser(User user, UUID id) throws BusinessException {
@@ -109,9 +100,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    @Transactional
-    public void deleteById(UUID id) {
-        userRepository.deleteById(id);
-    }
 }
