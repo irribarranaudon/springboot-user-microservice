@@ -3,7 +3,7 @@
 Este repositorio consta de 3 proyectos:
 - eureka-microservice, para el autodescubrimiento de microservicios
 - apigateway-zuul-microservice, para el enrutamiento desde un único punto de entrada.
-- user-microservice, como único microservicio en este un CRUD de usuarios, mediante api rest, sin autenticación y con base de datos en memoria (h2).
+- user-microservice, como único microservicio en este caso un CRUD de usuarios, mediante api rest, sin autenticación y con base de datos en memoria (h2).
 
 ## Requisitos
 
