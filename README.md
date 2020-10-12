@@ -78,6 +78,6 @@ Todos los servicios rest del microservicio de creación de usuarios quedaron doc
 Aquí no solo podremos ver los datos de entrada, sino que también podremos probar directamente los servicios del microservicio de creación de usuarios, sin utilizar la api gateway como enrutador.
 
 ```
-http://localhost:8080/swagger-ui.html#/u
+http://localhost:8080/swagger-ui.html#/
 ```
 
