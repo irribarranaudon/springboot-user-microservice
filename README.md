@@ -11,7 +11,7 @@ Este repositorio consta de 3 proyectos:
 
 ## Instrucciones para construir el proyecto.
 
-Para probar este proyecto, es importante seguir el orden indicado a continucación, primero tenemos que levantar el servidor de nombres, en este caso eureka, para esto nos situamos en la raíz del proyecto eureka-microservice y ejecutamos el siguiente comando:
+Para probar este proyecto, es importante seguir el orden indicado a continucación, primero tenemos que levantar el servidor de nombres, en este caso eureka, para esto nos situamos en la raíz del proyecto **eureka-microservice** y ejecutamos el siguiente comando:
 ```
 ./gradlew bootRun
 ```
