@@ -11,7 +11,7 @@ Este repositorio consta de 3 proyectos:
 
 ## Instrucciones para construir el proyecto.
 
-Para probar este proyecto, primero tenemos que levantar el servidor de nombres, en este caso eureka, para esto nos situamos en la raíz del proyecto eureka-microservice y ejecutamos el siguiente comando:
+Para probar este proyecto, es importante seguir el orden indicado a continucación, primero tenemos que levantar el servidor de nombres, en este caso eureka, para esto nos situamos en la raíz del proyecto eureka-microservice y ejecutamos el siguiente comando:
 ```
 ./gradlew bootRun
 ```
@@ -29,38 +29,38 @@ Finalmente solo queda levantar apigateway, para eso nos situamos en la raíz del
 ```
 Con esto ya es posible consumir con algún cliente como Postman por ejemplo, los servicio.
 
-## Servicios rest expuestos
+## Servicios rest expuestos por api gateway
 
 Por defecto la apigateway escucha en el puerto:8090 por lo que los request quedarían de la siguiente forma:
 
 ### Crear usuario
 
 ```
-POST - http://localhost:8090/api/users
+POST - http://localhost:8090/api/user
 ```
 
 ### Listar usuarios
 
 ```
-GET - http://localhost:8090/api/users
+GET - http://localhost:8090/api/user
 ```
 
 ### Buscar usuario por id
 
 ```
-GET - http://localhost:8090/api/users/{user-id}
+GET - http://localhost:8090/api/user/{user-id}
 ```
 
 ### Actualizar usuario
 
 ```
-POST - http://localhost:8090/api/users/{user-id}
+POST - http://localhost:8090/api/user/{user-id}
 ```
 
 ### Eliminar usuario
 
 ```
-DELETE - http://localhost:8090/api/users/{user-id}
+DELETE - http://localhost:8090/api/user/{user-id}
 ```
 
 ## Base de datos 
@@ -73,9 +73,11 @@ http://localhost:8080/h2-console/
 
 ## Swagger
 
-Todos los servicios quedaron documentados con swagger, para ver el detalle de cada endpoint, tendremos que ir a la siguiente url:
+Todos los servicios rest del microservicio de creación de usuarios quedaron documentados con swagger, para ver el detalle de cada endpoint, tendremos que ir a la siguiente url.
+
+Aquí no solo podremos ver los datos de entrada, sino que también podremos probar directamente los servicios del microservicio de creación de usuarios, sin utilizar la api gateway como enrutador.
 
 ```
-http://localhost:8080/
+http://localhost:8080/swagger-ui.html#/u
 ```
 
