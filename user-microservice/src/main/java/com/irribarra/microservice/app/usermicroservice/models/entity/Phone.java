@@ -1,5 +1,6 @@
 package com.irribarra.microservice.app.usermicroservice.models.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "phones")
 @Data
+@Builder
 public class Phone {
 
     @Id

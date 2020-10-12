@@ -1,14 +1,18 @@
 package com.irribarra.microservice.app.usermicroservice.util;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
+import com.irribarra.microservice.app.usermicroservice.models.dto.PhoneRequestDTO;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.entity.Phone;
 import com.irribarra.microservice.app.usermicroservice.models.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -100,13 +104,13 @@ public class UserUtils {
      * @param user entidad usuario
      * @throws BusinessException excepcion custom
      */
-    public static void validateUserRequestParameters(User user) throws BusinessException {
+    public static void validateUserRequestParameters(UserRequestDTO user) throws BusinessException {
         log.info("Validando datos de usuario: {}", user.getEmail());
         ExceptionUtil.throwExecIf(user.getPassword() == null, String.format(VALIDATE_ERROR_MESSAGE, "password"));
         ExceptionUtil.throwExecIf(user.getEmail() == null, String.format(VALIDATE_ERROR_MESSAGE, "email"));
         ExceptionUtil.throwExecIf(user.getName() == null, String.format(VALIDATE_ERROR_MESSAGE, "name"));
         if (!user.getPhones().isEmpty()) {
-            for (Phone phone : user.getPhones()) {
+            for (PhoneRequestDTO phone : user.getPhones()) {
                 log.info("Validando telefonos ingresados.");
                 ExceptionUtil.throwExecIf(phone.getCityCode() == null, String.format(VALIDATE_ERROR_MESSAGE, "city code"));
                 ExceptionUtil.throwExecIf(phone.getCountryCode() == null, String.format(VALIDATE_ERROR_MESSAGE, "country code"));
@@ -140,6 +144,39 @@ public class UserUtils {
                         .modified(user.getModified())
                         .name(user.getName())
                         .phones(user.getPhones())
+                        .build()
+        ).collect(Collectors.toList());
+    }
+
+    /**
+     * Convierte una solicitud de usuario a una entiedad persistente.
+     *
+     * @param user Solicitud cliente.
+     * @return Nuevo usuario persistente.
+     */
+    public static User getUserRequest(UserRequestDTO user) {
+        User newUser = new User();
+        try {
+            BeanUtils.copyProperties(newUser, user);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException();
+        }
+        newUser.setPhones(getPhones(user.getPhones()));
+        return newUser;
+    }
+
+    /**
+     * Copia propiedades de una lista de tipo PhoneRequestDTO en otra de tipo Phone
+     *
+     * @param phones Requerimiento de nuevos telefonos.
+     * @return Nueva lista de teléfonos perisistentes.
+     */
+    private static List<Phone> getPhones(List<PhoneRequestDTO> phones) {
+        return phones.stream().map(phone ->
+                Phone.builder()
+                        .cityCode(phone.getCityCode())
+                        .countryCode(phone.getCountryCode())
+                        .number(phone.getNumber())
                         .build()
         ).collect(Collectors.toList());
     }

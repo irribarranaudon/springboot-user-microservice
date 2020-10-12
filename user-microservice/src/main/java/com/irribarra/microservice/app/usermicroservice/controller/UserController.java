@@ -2,8 +2,8 @@ package com.irribarra.microservice.app.usermicroservice.controller;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateResponseDTO;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
-import com.irribarra.microservice.app.usermicroservice.models.entity.User;
 import com.irribarra.microservice.app.usermicroservice.service.UserService;
 import com.irribarra.microservice.app.usermicroservice.util.ExceptionUtil;
 import com.irribarra.microservice.app.usermicroservice.util.UserUtils;
@@ -20,6 +20,7 @@ import java.util.UUID;
 
 @RestController
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -30,17 +31,17 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> saveUser(@RequestBody User user) throws BusinessException {
+    public ResponseEntity<?> saveUser(@RequestBody UserRequestDTO user) throws BusinessException {
         log.info("method - saveUser");
         UserUtils.validateUserRequestParameters(user);
-        UserCreateResponseDTO newUser = userService.saveOrUpdate(user, null);
+        UserCreateResponseDTO newUser = userService.saveOrUpdate(UserUtils.getUserRequest(user), null);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable UUID id) throws BusinessException {
+    public ResponseEntity<?> updateUser(@RequestBody UserRequestDTO user, @PathVariable UUID id) throws BusinessException {
         log.info("method - updateUser");
-        UserCreateResponseDTO updatedUser = userService.saveOrUpdate(user, id);
+        UserCreateResponseDTO updatedUser = userService.saveOrUpdate(UserUtils.getUserRequest(user), id);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedUser);
     }
 

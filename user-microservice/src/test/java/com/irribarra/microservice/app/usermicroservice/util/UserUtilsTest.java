@@ -1,6 +1,7 @@
 package com.irribarra.microservice.app.usermicroservice.util;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.entity.User;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class UserUtilsTest {
 
     @Test
     void validateUserRequestParameters() {
-        User user = new User();
+        UserRequestDTO user = new UserRequestDTO();
         user.setEmail("test");
         user.setPassword("test");
         Exception exceptionName = assertThrows(BusinessException.class, () ->
