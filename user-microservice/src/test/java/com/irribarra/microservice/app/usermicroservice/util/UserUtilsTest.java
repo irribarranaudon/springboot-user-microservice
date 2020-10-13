@@ -1,6 +1,7 @@
 package com.irribarra.microservice.app.usermicroservice.util;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.entity.User;
@@ -59,7 +60,7 @@ class UserUtilsTest {
 
     @Test
     void validateUserRequestParameters() {
-        UserRequestDTO user = new UserRequestDTO();
+        UserCreateRequestDTO user = new UserCreateRequestDTO();
         user.setEmail("test");
         user.setPassword("test");
         Exception exceptionName = assertThrows(BusinessException.class, () ->
