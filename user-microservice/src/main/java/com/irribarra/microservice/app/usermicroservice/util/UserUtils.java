@@ -1,10 +1,7 @@
 package com.irribarra.microservice.app.usermicroservice.util;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
-import com.irribarra.microservice.app.usermicroservice.models.dto.PhoneRequestDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateResponseDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
+import com.irribarra.microservice.app.usermicroservice.models.dto.*;
 import com.irribarra.microservice.app.usermicroservice.models.entity.Phone;
 import com.irribarra.microservice.app.usermicroservice.models.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -105,7 +102,7 @@ public class UserUtils {
      * @param user entidad usuario
      * @throws BusinessException excepcion custom
      */
-    public static void validateUserRequestParameters(UserRequestDTO user) throws BusinessException {
+    public static void validateUserRequestParameters(UserCreateRequestDTO user) throws BusinessException {
         log.info("Validando datos de usuario: {}", user.getEmail());
         ExceptionUtil.throwExecIf(user.getPassword() == null, String.format(VALIDATE_ERROR_MESSAGE, "password"));
         ExceptionUtil.throwExecIf(user.getEmail() == null, String.format(VALIDATE_ERROR_MESSAGE, "email"));

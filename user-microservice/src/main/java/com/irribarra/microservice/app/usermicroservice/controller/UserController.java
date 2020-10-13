@@ -1,6 +1,7 @@
 package com.irribarra.microservice.app.usermicroservice.controller;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
+import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateResponseDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
 import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> saveUser(@RequestBody UserRequestDTO user) throws BusinessException {
+    public ResponseEntity<?> saveUser(@RequestBody UserCreateRequestDTO user) throws BusinessException {
         log.info("method - saveUser");
         UserUtils.validateUserRequestParameters(user);
         UserCreateResponseDTO newUser = userService.saveOrUpdate(UserUtils.getUserRequest(user), null);

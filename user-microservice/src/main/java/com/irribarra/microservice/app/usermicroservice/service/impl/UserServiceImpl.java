@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -82,8 +83,8 @@ public class UserServiceImpl implements UserService {
 
         log.info("Actualizando usuario.");
         User userToUpdate = oUser.get();
-        userToUpdate.setEmail(user.getEmail() != null ? user.getEmail() : userToUpdate.getEmail());
-        userToUpdate.setIsActive(user.getIsActive());
+        userToUpdate.setEmail(Optional.of(user.getEmail()).orElse(userToUpdate.getEmail()));
+        userToUpdate.setIsActive(Optional.of(user.getIsActive()).orElse(userToUpdate.getIsActive()));
         userToUpdate.setModified(LocalDateTime.now());
         userToUpdate.setName(user.getName());
         return userRepository.save(userToUpdate);
