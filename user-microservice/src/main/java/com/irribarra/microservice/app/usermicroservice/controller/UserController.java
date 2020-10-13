@@ -1,10 +1,7 @@
 package com.irribarra.microservice.app.usermicroservice.controller;
 
 import com.irribarra.microservice.app.usermicroservice.exception.BusinessException;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateRequestDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserCreateResponseDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserRequestDTO;
-import com.irribarra.microservice.app.usermicroservice.models.dto.UserResponseDTO;
+import com.irribarra.microservice.app.usermicroservice.models.dto.*;
 import com.irribarra.microservice.app.usermicroservice.service.UserService;
 import com.irribarra.microservice.app.usermicroservice.util.ExceptionUtil;
 import com.irribarra.microservice.app.usermicroservice.util.UserUtils;
@@ -40,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody UserRequestDTO user, @PathVariable UUID id) throws BusinessException {
+    public ResponseEntity<?> updateUser(@RequestBody UserUpdateRequestDTO user, @PathVariable UUID id) throws BusinessException {
         log.info("method - updateUser");
         UserCreateResponseDTO updatedUser = userService.saveOrUpdate(UserUtils.getUserRequest(user), id);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedUser);

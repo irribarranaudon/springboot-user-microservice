@@ -83,8 +83,8 @@ public class UserServiceImpl implements UserService {
 
         log.info("Actualizando usuario.");
         User userToUpdate = oUser.get();
-        userToUpdate.setEmail(Optional.of(user.getEmail()).orElse(userToUpdate.getEmail()));
-        userToUpdate.setIsActive(Optional.of(user.getIsActive()).orElse(userToUpdate.getIsActive()));
+        userToUpdate.setEmail(Optional.ofNullable(user.getEmail()).orElse(userToUpdate.getEmail()));
+        userToUpdate.setIsActive(Optional.ofNullable(user.getIsActive()).orElse(userToUpdate.getIsActive()));
         userToUpdate.setModified(LocalDateTime.now());
         userToUpdate.setName(user.getName());
         return userRepository.save(userToUpdate);
